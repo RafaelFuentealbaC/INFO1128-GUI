@@ -19,8 +19,8 @@ def Image2Pix(img):
 def MaskImg(img):
     aT = array([# %R   %G   %B
                 [0.90,0.00,0.00], #Canal Rojo
-                [0.00,0.00,0.00], #Canal Verde
-                [0.00,0.00,0.00]  #Canal Azul
+                [0.14,0.00,0.00], #Canal Verde
+                [0.07,0.00,0.00]  #Canal Azul
                 ])
     img = dot(img,aT)
     return Pix2Image(img)
