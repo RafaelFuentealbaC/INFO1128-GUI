@@ -19,7 +19,7 @@ def Image2Pix(img):
 def MaskImg(img):
     aT = array([# %R   %G   %B
                 [0.00,0.00,0.00], #Canal Rojo
-                [0.00,1.00,0.00], #Canal Verde
+                [1.00,0.46,0.08], #Canal Verde
                 [0.00,0.00,0.00]  #Canal Azul
                 ])
     img = dot(img,aT)
@@ -28,5 +28,5 @@ def MaskImg(img):
 img = Image.open('F3.PNG')
 im = Image2Pix(img)
 imagen = MaskImg(im)
-imagen.save('F3_Green.PNG')
-image.show()
+imagen.save('F3_Orange.PNG')
+imagen.show()

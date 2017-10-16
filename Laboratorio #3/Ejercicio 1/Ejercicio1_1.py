@@ -20,16 +20,7 @@ def Image2Pix(img):
 def MaskImg(img):
     aT = array([# %R   %G   %B
                 [0.00,0.00,0.00], #Canal Rojo
-                [0.00,1.00,0.00], #Canal Verde
-                [0.00,0.00,0.00]  #Canal Azul
-                ])
-    img = dot(img,aT)
-    return Pix2Image(img)
-
-def MaskingGreen(img):
-    aT = array([# %R   %G   %B
-                [1.00,0.00,0.00], #Canal Rojo
-                [0.00,0.00,0.00], #Canal Verde
+                [1.00,1.00,0.00], #Canal Verde
                 [0.00,0.00,0.00]  #Canal Azul
                 ])
     img = dot(img,aT)
@@ -38,9 +29,6 @@ def MaskingGreen(img):
 img = Image.open('F1.PNG')
 im = Image2Pix(img)
 imagen = MaskImg(im)
-imagen.save('F1_Green.PNG')
+imagen.save('F1_Yellow.PNG')
+imagen.show()
 
-img_Green = Image.open('F1_Green.PNG')
-im_Green = Image2Pix(img_Green)
-imagen_Yellow = MaskingGreen(im_Green)
-imagen_Yellow.save('F1_Yellow.PNG')

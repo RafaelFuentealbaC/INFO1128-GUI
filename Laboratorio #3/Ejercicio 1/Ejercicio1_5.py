@@ -19,9 +19,9 @@ def Image2Pix(img):
 
 def MaskImg(img):
     aT = array([# %R   %G   %B
-                [1.00,0.00,0.00], #Canal Rojo
+                [0.00,0.00,0.00], #Canal Rojo
                 [0.00,0.00,0.00], #Canal Verde
-                [0.00,0.00,1.00]  #Canal Azul
+                [0.79,0.48,0.70]  #Canal Azul
                 ])
     img = dot(img,aT)
     return Pix2Image(img)
@@ -29,5 +29,5 @@ def MaskImg(img):
 img = Image.open('F5.PNG')
 im = Image2Pix(img)
 imagen = MaskImg(im)
-imagen.save('FlorRosa.PNG')
+imagen.save('F5_Flor_Rosa.PNG')
 imagen.show()
