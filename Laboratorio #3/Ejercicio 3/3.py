@@ -46,12 +46,15 @@ def MaskImg(img,aT,mode):
     return Pix2Image(img,mode)
 
 
-aImg=['F1.PNG','F2.PNG','F2.PNG','F4.PNG','F5.PNG','F6.PNG']
+aImg=['F1.jpg','F2.jpg','F3.jpg','F4.jpg','F5.jpg','F6.jpg']
 #GRAY
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     imagen = img.convert('L')
     imagen.save('gray/gray_'+(aImg[i]))
+
+#Canales RGB
+
 #RED
 for i in range(len(aImg)):
      img = Image.open(aImg[i])
@@ -85,44 +88,167 @@ for i in range(len(aImg)):
                 ])
      imagen = MaskImg(im,aT,'RGB')
      imagen.save('RGB/B/blue_'+(aImg[i]))
+     #imagen general
+     imagen1 = img.convert('RGB')
+     imagen1.save('RGB/rgb_'+(aImg[i]))
+
+#Canales RGBA
+
+
+#RED
+for i in range(len(aImg)):
+    img = Image.open(aImg[i])
+    im = Image2Pix_rgba(img)
+    aT = array([# %R   %G   %B   &A
+                [1.00,0.00,0.00,0.00], #Canal Rojo
+                [0.00,0.00,0.00,0.00], #Canal Verde
+                [0.00,0.00,0.00,0.00], #Canal Azul
+                [0.00,0.00,0.00,0.00]  #Canal Alpha
+                ])
+    imagen = MaskImg(im,aT,'RGBA')
+    imagen.save('RGBA/R/red_'+(aImg[i]))
+
+#Green
+for i in range(len(aImg)):
+    img = Image.open(aImg[i])
+    im = Image2Pix_rgba(img)
+    aT = array([# %R   %G   %B   &A
+                [0.00,0.00,0.00,0.00], #Canal Rojo
+                [0.00,1.00,0.00,0.00], #Canal Verde
+                [0.00,0.00,0.00,0.00], #Canal Azul
+                [0.00,0.00,0.00,0.00]  #Canal Alpha
+                ])
+    imagen = MaskImg(im,aT,'RGBA')
+    imagen.save('RGBA/G/green_'+(aImg[i]))
+#Blue
+for i in range(len(aImg)):
+    img = Image.open(aImg[i])
+    im = Image2Pix_rgba(img)
+    aT = array([# %R   %G   %B   &A
+                [0.00,0.00,0.00,0.00], #Canal Rojo
+                [0.00,0.00,0.00,0.00], #Canal Verde
+                [0.00,0.00,1.00,0.00], #Canal Azul
+                [0.00,0.00,0.00,0.00]  #Canal Alpha
+                ])
+    imagen = MaskImg(im,aT,'RGBA')
+    imagen.save('RGBA/B/blue_'+(aImg[i]))
+
+#Alpha
 
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_rgba(img)
-    aT = array([# %R   %G   %B
-                [1.00,0.00,0.00], #Canal Rojo
-                [0.00,0.00,0.00], #Canal Verde
-                [0.00,0.00,0.00], #Canal Azul
-                [0.00,0.00,0.00]  #Canal Alpha
+    aT = array([# %R   %G   %B   &A
+                [0.00,0.00,0.00,0.00], #Canal Rojo
+                [0.00,0.00,0.00,0.00], #Canal Verde
+                [0.00,0.00,0.00,0.00], #Canal Azul
+                [0.00,0.00,0.00,1.00]  #Canal Alpha
                 ])
     imagen = MaskImg(im,aT,'RGBA')
-    imagen.save('RGBA/R/red_'+(aImg[i]))
-    
+    imagen.save('RGBA/A/alpha_'+(aImg[i]))
+    #imagen RGBA General
     imagen1 = img.convert('RGBA')
     imagen1.save('RGBA/rgba_'+(aImg[i]))
 
-'''
+
+#Canales CMYK
+#Canal C
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_cmyk(img)
-    aT = array([# %R   %G   %B
-                [0.01,0.00,0.00], #Canal Rojo
-                [0.00,0.01,0.00], #Canal Verde
-                [0.00,0.00,0.01]  #Canal Azul
+    aT = array([#  C    M    Y    K
+                [1.00,0.00,0.00,0.00], 
+                [0.00,0.00,0.00,0.00], 
+                [0.00,0.00,0.00,0.00],
+                [0.00,0.00,0.00,0.00]
                 ])
-    imagen = MaskImg(im,aT)
-    imagen.save('CMYK/cmyk_'+(aImg[i]))
+    imagen = MaskImg(im,aT,'CMYK')
+    imagen.save('CMYK/C/c_'+(aImg[i]))
+
+#Canal M
+for i in range(len(aImg)):
+    img = Image.open(aImg[i])
+    im = Image2Pix_cmyk(img)
+    aT = array([#  C    M    Y    K
+                [0.00,0.00,0.00,0.00], 
+                [0.00,1.00,0.00,0.00], 
+                [0.00,0.00,0.00,0.00],
+                [0.00,0.00,0.00,0.00]
+                ])
+    imagen = MaskImg(im,aT,'CMYK')
+    imagen.save('CMYK/M/m_'+(aImg[i]))
 
 
+#Canal Y
+for i in range(len(aImg)):
+    img = Image.open(aImg[i])
+    im = Image2Pix_cmyk(img)
+    aT = array([#  C    M    Y    K
+                [0.00,0.00,0.00,0.00], 
+                [0.00,0.00,0.00,0.00], 
+                [0.00,0.00,1.00,0.00],
+                [0.00,0.00,0.00,0.00]
+                ])
+    imagen = MaskImg(im,aT,'CMYK')
+    imagen.save('CMYK/Y/y_'+(aImg[i]))
+
+#canal K
+
+for i in range(len(aImg)):
+    img = Image.open(aImg[i])
+    im = Image2Pix_cmyk(img)
+    aT = array([#  C    M    Y    K
+                [0.00,0.00,0.00,0.00], 
+                [0.00,0.00,0.00,0.00], 
+                [0.00,0.00,0.00,0.00],
+                [0.00,0.00,0.00,1.00]
+                ])
+    imagen = MaskImg(im,aT,'CMYK')
+    imagen.save('CMYK/K/k_'+(aImg[i]))
+
+    imagen1 = img.convert('CMYK')
+    imagen1.save('CMYK/cmyk_'+(aImg[i]))
+'''
+#Canales HSV
+
+#canal H
+for i in range(len(aImg)):
+    img = Image.open(aImg[i])
+    im = Image2Pix_hsv(img)
+    aT = array([# H     S    V
+                [1.00,0.00,0.00], #Canal H
+                [0.00,0.00,0.00], #Canal S
+                [0.00,0.00,0.00]  #Canal V
+                ])
+    imagen = MaskImg(im,aT,'HSV')
+    imagen.save('HSV/H/h_'+(aImg[i]))
+
+#canal S
 
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_hsv(img)
-    aT = array([# %R   %G   %B
-                [0.01,0.00,0.00], #Canal Rojo
-                [0.00,0.01,0.00], #Canal Verde
-                [0.00,0.00,0.01]  #Canal Azul
+    aT = array([# H     S    V
+                [0.00,0.00,0.00], #Canal H
+                [0.00,1.00,0.00], #Canal S
+                [0.00,0.00,0.00]  #Canal V
                 ])
-    imagen = MaskImg(im,aT)
-    imagen.save('HSV/hsv_'+(aImg[i]))
+    imagen = MaskImg(im,aT,'HSV')
+    imagen.save('HSV/S/s_'+(aImg[i]))
+
+#canal V
+
+for i in range(len(aImg)):
+    img = Image.open(aImg[i])
+    im = Image2Pix_hsv(img)
+    aT = array([# H     S    V
+                [0.00,0.00,0.00], #Canal H
+                [0.00,0.00,0.00], #Canal S
+                [0.00,0.00,1.00]  #Canal V
+                ])
+    imagen = MaskImg(im,aT,'HSV')
+    imagen.save('HSV/V/v_'+(aImg[i]))
+ #   imagen1 = img.convert('HSV')
+ #   imagen1.save('HSV/hsv_'+(aImg[i]))
 '''
+print 'listo'
