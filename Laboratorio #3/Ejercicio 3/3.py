@@ -2,6 +2,7 @@ from PIL import Image
 from numpy import array,dot,dstack,ones,random,uint8,zeros
 import numpy as np
 import colorsys
+
 def Pix2Image(img,mode):
     if(img.max() > 255):
         img *= 255.0 / img.max()
@@ -45,7 +46,24 @@ def MaskImg(img,aT,mode):
     img = dot(img,aT)
     return Pix2Image(img,mode)
 
-aImg=['F1.png','F2.png','F3.png','F4.png','F5.png','F6.png']
+def TresCanales(C1,C2,C3):
+    aT = array([# %C1 %C2 %C3
+                [C1,0.00,0.00], #Canal 1
+                [0.00,C2,0.00], #Canal 2
+                [0.00,0.00,C3]  #Canal 3
+                ])
+    return aT
+
+def CuatroCanales(C1,C2,C3,C4):
+    aT = array([# %C1 %C2 %C3 &C4
+                [C1,0.00,0.00,0.00], #Canal 1
+                [0.00,C2,0.00,0.00], #Canal 2
+                [0.00,0.00,C3,0.00], #Canal 3
+                [0.00,0.00,0.00,C4]  #Canal 4
+                ])
+    return aT
+
+aImg=['F1.PNG','F2.PNG','F3.PNG','F4.PNG','F5.PNG','F6.PNG']
 
 #GRAY
 for i in range(len(aImg)):
@@ -59,11 +77,7 @@ for i in range(len(aImg)):
 for i in range(len(aImg)):
      img = Image.open(aImg[i])
      im = Image2Pix_rgb(img)
-     aT = array([# %R   %G   %B
-                [1.00,0.00,0.00], #Canal Rojo
-                [0.00,0.00,0.00], #Canal Verde
-                [0.00,0.00,0.00]  #Canal Azul
-                ])
+     aT = TresCanales(1.00,0.00,0.00)
      imagen = MaskImg(im,aT,'RGB')
      imagen.save('RGB/R/red_'+(aImg[i]))
      
@@ -71,11 +85,7 @@ for i in range(len(aImg)):
 for i in range(len(aImg)):
      img = Image.open(aImg[i])
      im = Image2Pix_rgb(img)
-     aT = array([# %R   %G   %B
-                [0.00,0.00,0.00], #Canal Rojo
-                [0.00,1.00,0.00], #Canal Verde
-                [0.00,0.00,0.00]  #Canal Azul
-                ])
+     aT = TresCanales(0.00,1.00,0.00)
      imagen = MaskImg(im,aT,'RGB')
      imagen.save('RGB/G/green_'+(aImg[i]))
      
@@ -83,11 +93,7 @@ for i in range(len(aImg)):
 for i in range(len(aImg)):
      img = Image.open(aImg[i])
      im = Image2Pix_rgb(img)
-     aT = array([# %R   %G   %B
-                [0.00,0.00,0.00], #Canal Rojo
-                [0.00,0.00,0.00], #Canal Verde
-                [0.00,0.00,1.00]  #Canal Azul
-                ])
+     aT = TresCanales(0.00,0.00,1.00)
      imagen = MaskImg(im,aT,'RGB')
      imagen.save('RGB/B/blue_'+(aImg[i]))
      #imagen general
@@ -95,17 +101,14 @@ for i in range(len(aImg)):
      imagen1.save('RGB/ImgRGB/rgb_'+(aImg[i]))
 
 
+aImg=['F1.jpg','F2.jpg','F3.jpg','F4.jpg','F5.jpg','F6.jpg']
+
 #Canales RGBA
 #RED
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_rgba(img)
-    aT = array([# %R   %G   %B   &A
-                [1.00,0.00,0.00,0.00], #Canal Rojo
-                [0.00,0.00,0.00,0.00], #Canal Verde
-                [0.00,0.00,0.00,0.00], #Canal Azul
-                [0.00,0.00,0.00,0.00]  #Canal Alpha
-                ])
+    aT = CuatroCanales(1.00,0.00,0.00,0.00)
     imagen = MaskImg(im,aT,'RGBA')
     imagen.save('RGBA/R/red_'+(aImg[i]))
     
@@ -113,12 +116,7 @@ for i in range(len(aImg)):
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_rgba(img)
-    aT = array([# %R   %G   %B   &A
-                [0.00,0.00,0.00,0.00], #Canal Rojo
-                [0.00,1.00,0.00,0.00], #Canal Verde
-                [0.00,0.00,0.00,0.00], #Canal Azul
-                [0.00,0.00,0.00,0.00]  #Canal Alpha
-                ])
+    aT = CuatroCanales(0.00,1.00,0.00,0.00)
     imagen = MaskImg(im,aT,'RGBA')
     imagen.save('RGBA/G/green_'+(aImg[i]))
     
@@ -126,12 +124,7 @@ for i in range(len(aImg)):
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_rgba(img)
-    aT = array([# %R   %G   %B   &A
-                [0.00,0.00,0.00,0.00], #Canal Rojo
-                [0.00,0.00,0.00,0.00], #Canal Verde
-                [0.00,0.00,1.00,0.00], #Canal Azul
-                [0.00,0.00,0.00,0.00]  #Canal Alpha
-                ])
+    aT = CuatroCanales(0.00,0.00,1.00,0.00)
     imagen = MaskImg(im,aT,'RGBA')
     imagen.save('RGBA/B/blue_'+(aImg[i]))
 
@@ -139,32 +132,20 @@ for i in range(len(aImg)):
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_rgba(img)
-    aT = array([# %R   %G   %B   &A
-                [0.00,0.00,0.00,0.00], #Canal Rojo
-                [0.00,0.00,0.00,0.00], #Canal Verde
-                [0.00,0.00,0.00,0.00], #Canal Azul
-                [0.00,0.00,0.00,1.00]  #Canal Alpha
-                ])
+    aT = CuatroCanales(0.00,0.00,0.00,1.00)
     imagen = MaskImg(im,aT,'RGBA')
     imagen.save('RGBA/A/alpha_'+(aImg[i]))
     #imagen RGBA General
     imagen1 = img.convert('RGBA')
     imagen1.save('RGBA/ImgRGBA/rgba_'+(aImg[i]))
-
- 
-aImg=['F1.jpg','F2.jpg','F3.jpg','F4.jpg','F5.jpg','F6.jpg']
+    
 
 #Canales CMYK
 #Canal C
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_cmyk(img)
-    aT = array([#  C    M    Y    K
-                [1.00,0.00,0.00,0.00],
-                [0.00,0.00,0.00,0.00],
-                [0.00,0.00,0.00,0.00],
-                [0.00,0.00,0.00,0.00]
-                ])
+    aT = CuatroCanales(1.00,0.00,0.00,0.00)
     imagen = MaskImg(im,aT,'CMYK')
     imagen.save('CMYK/C/c_'+(aImg[i]))
 
@@ -172,12 +153,7 @@ for i in range(len(aImg)):
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_cmyk(img)
-    aT = array([#  C    M    Y    K
-                [0.00,0.00,0.00,0.00],
-                [0.00,1.00,0.00,0.00],
-                [0.00,0.00,0.00,0.00],
-                [0.00,0.00,0.00,0.00]
-                ])
+    aT = CuatroCanales(0.00,1.00,0.00,0.00)
     imagen = MaskImg(im,aT,'CMYK')
     imagen.save('CMYK/M/m_'+(aImg[i]))
 
@@ -185,12 +161,7 @@ for i in range(len(aImg)):
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_cmyk(img)
-    aT = array([#  C    M    Y    K
-                [0.00,0.00,0.00,0.00],
-                [0.00,0.00,0.00,0.00],
-                [0.00,0.00,1.00,0.00],
-                [0.00,0.00,0.00,0.00]
-                ])
+    aT = CuatroCanales(0.00,0.00,1.00,0.00)
     imagen = MaskImg(im,aT,'CMYK')
     imagen.save('CMYK/Y/y_'+(aImg[i]))
 
