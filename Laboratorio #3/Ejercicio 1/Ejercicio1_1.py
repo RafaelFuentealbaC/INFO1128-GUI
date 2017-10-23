@@ -1,6 +1,5 @@
 from PIL import Image
 from numpy import array,dot,dstack,ones,random,uint8,zeros
-import numpy as np
 
 def Pix2Image(img,mode='RGB'):
     if(img.max() > 255):

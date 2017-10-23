@@ -1,32 +1,19 @@
 from PIL import Image
-from numpy import array,dot,dstack,ones,random,uint8,zeros
+import pygame
 
-def Pix2Image(img,mode='RGB'):
-    if(img.max() > 255):
-        img *= 255.0 / img.max()
-    img = array(img,uint8)
-    imagen = Image.fromarray(img,mode)
-    return imagen
+img = pygame.image.load('F4.PNG')
+w_h = pygame.Surface.get_size(img)
+destino = pygame.Surface(w_h)
+im = pygame.transform.threshold(destino,img,(255,0,0),(100,100,100),(0,0,0),2)
+pygame.image.save(destino,'F4_1.PNG')
 
-def Image2Pix(img):
-    i = img.convert('RGB')
-    w,h = i.size
-    data = i.getdata()
-    img = array(data,uint8)
-    img = img.reshape((h,w,3))
-    return img
-
-def MaskImg(img):
-    aT = array([# %R   %G   %B
-                [0.90,0.00,0.00], #Canal Rojo
-                [0.14,0.00,0.00], #Canal Verde
-                [0.07,0.00,0.00]  #Canal Azul
-                ])
-    img = dot(img,aT)
-    return Pix2Image(img)
-
-img = Image.open('F4.PNG')
-im = Image2Pix(img)
-imagen = MaskImg(im)
+img = Image.open('F4_1.PNG')
+imagen = img.convert('RGB')
+pixels = imagen.load()
+width,height = imagen.size
+for x in range(width):
+    for y in range(height):
+        r,g,b = pixels[x,y]
+        pixels[x,y] = (b,g,r)
 imagen.save('F4_Flores_Rojas.PNG')
 imagen.show()
