@@ -36,8 +36,8 @@ for i in aNomImg:
     #creacion de la imagen ecualizada
     foto_ecualizada = Image.new('L',imagen.size)
     foto_ecualizada.putdata(datos_Lineales)
-    #EcHisto(datos_Lineales,'H'+i+'/Histo_Ec_'+i+'.PNG',i)
-    foto_ecualizada.save('H'+i+'/'+i+'_Ecualizada.PNG',imagen.close())
-    foto_ecualizada.close()
+    EcHisto(datos_Lineales,'H'+i+'/Histo_Ec_'+i+'.PNG',i)
+    foto_ecualizada.save('H'+i+'/'+i+'_Ecualizada.PNG')#,imagen.close())
+    #foto_ecualizada.close()
 print 'Fotos Ecualizadas Guardadas'
 

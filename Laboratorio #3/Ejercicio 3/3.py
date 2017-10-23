@@ -1,7 +1,7 @@
 from PIL import Image
 from numpy import array,dot,dstack,ones,random,uint8,zeros
 import numpy as np
-
+import colorsys
 def Pix2Image(img,mode):
     if(img.max() > 255):
         img *= 255.0 / img.max()
@@ -45,8 +45,8 @@ def MaskImg(img,aT,mode):
     img = dot(img,aT)
     return Pix2Image(img,mode)
 
+aImg=['F1.png','F2.png','F3.png','F4.png','F5.png','F6.png']
 
-aImg=['F1.jpg','F2.jpg','F3.jpg','F4.jpg','F5.jpg','F6.jpg']
 #GRAY
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
@@ -94,7 +94,6 @@ for i in range(len(aImg)):
 
 #Canales RGBA
 
-
 #RED
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
@@ -107,7 +106,6 @@ for i in range(len(aImg)):
                 ])
     imagen = MaskImg(im,aT,'RGBA')
     imagen.save('RGBA/R/red_'+(aImg[i]))
-
 #Green
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
@@ -149,16 +147,18 @@ for i in range(len(aImg)):
     #imagen RGBA General
     imagen1 = img.convert('RGBA')
     imagen1.save('RGBA/rgba_'+(aImg[i]))
-
+    
+aImg=['F1.jpg','F2.jpg','F3.jpg','F4.jpg','F5.jpg','F6.jpg']
 
 #Canales CMYK
 #Canal C
+
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_cmyk(img)
     aT = array([#  C    M    Y    K
-                [1.00,0.00,0.00,0.00], 
-                [0.00,0.00,0.00,0.00], 
+                [1.00,0.00,0.00,0.00],
+                [0.00,0.00,0.00,0.00],
                 [0.00,0.00,0.00,0.00],
                 [0.00,0.00,0.00,0.00]
                 ])
@@ -170,8 +170,8 @@ for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_cmyk(img)
     aT = array([#  C    M    Y    K
-                [0.00,0.00,0.00,0.00], 
-                [0.00,1.00,0.00,0.00], 
+                [0.00,0.00,0.00,0.00],
+                [0.00,1.00,0.00,0.00],
                 [0.00,0.00,0.00,0.00],
                 [0.00,0.00,0.00,0.00]
                 ])
@@ -184,8 +184,8 @@ for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_cmyk(img)
     aT = array([#  C    M    Y    K
-                [0.00,0.00,0.00,0.00], 
-                [0.00,0.00,0.00,0.00], 
+                [0.00,0.00,0.00,0.00],
+                [0.00,0.00,0.00,0.00],
                 [0.00,0.00,1.00,0.00],
                 [0.00,0.00,0.00,0.00]
                 ])
@@ -198,8 +198,8 @@ for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_cmyk(img)
     aT = array([#  C    M    Y    K
-                [0.00,0.00,0.00,0.00], 
-                [0.00,0.00,0.00,0.00], 
+                [0.00,0.00,0.00,0.00],
+                [0.00,0.00,0.00,0.00],
                 [0.00,0.00,0.00,0.00],
                 [0.00,0.00,0.00,1.00]
                 ])
@@ -208,19 +208,21 @@ for i in range(len(aImg)):
 
     imagen1 = img.convert('CMYK')
     imagen1.save('CMYK/cmyk_'+(aImg[i]))
-'''
+
+
 #Canales HSV
+
 
 #canal H
 for i in range(len(aImg)):
     img = Image.open(aImg[i])
     im = Image2Pix_hsv(img)
     aT = array([# H     S    V
-                [1.00,0.00,0.00], #Canal H
+                [1.00,1.00,1.00], #Canal H
                 [0.00,0.00,0.00], #Canal S
                 [0.00,0.00,0.00]  #Canal V
                 ])
-    imagen = MaskImg(im,aT,'HSV')
+    imagen = MaskImg(im,aT,'RGB')
     imagen.save('HSV/H/h_'+(aImg[i]))
 
 #canal S
@@ -230,10 +232,10 @@ for i in range(len(aImg)):
     im = Image2Pix_hsv(img)
     aT = array([# H     S    V
                 [0.00,0.00,0.00], #Canal H
-                [0.00,1.00,0.00], #Canal S
+                [1.00,1.00,1.00], #Canal S
                 [0.00,0.00,0.00]  #Canal V
                 ])
-    imagen = MaskImg(im,aT,'HSV')
+    imagen = MaskImg(im,aT,'RGB')
     imagen.save('HSV/S/s_'+(aImg[i]))
 
 #canal V
@@ -244,11 +246,11 @@ for i in range(len(aImg)):
     aT = array([# H     S    V
                 [0.00,0.00,0.00], #Canal H
                 [0.00,0.00,0.00], #Canal S
-                [0.00,0.00,1.00]  #Canal V
+                [1.00,1.00,1.00]  #Canal V
                 ])
-    imagen = MaskImg(im,aT,'HSV')
+    imagen = MaskImg(im,aT,'RGB')
     imagen.save('HSV/V/v_'+(aImg[i]))
- #   imagen1 = img.convert('HSV')
- #   imagen1.save('HSV/hsv_'+(aImg[i]))
-'''
+
+    #imagen1 = img.convert('HSV')
+    #imagen1.save('HSV/hsv_'+(aImg[i]))
 print 'listo'

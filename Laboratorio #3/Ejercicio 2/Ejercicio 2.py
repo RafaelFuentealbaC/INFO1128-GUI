@@ -45,10 +45,30 @@ def load_image(filename, transparent=False):
 ventana = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Imagen Termica")
 imagen_fondo = load_image('F6.PNG')
+verde=(3,255,3)
 
 while True:
     for eventos in pygame.event.get():
         if eventos.type == QUIT:
             sys.exit(0)
+
+        if(pygame.mouse.get_pressed()==(1,0,0)):
+              if(pygame.mouse.get_pos()[0]>0 and pygame.mouse.get_pos()[0]<303):
+                   if(pygame.mouse.get_pos()[1]>0 and pygame.mouse.get_pos()[1]<235):
+                    pos=pygame.mouse.get_pos() 
+                    color=ventana.get_at((pos[0], pos[1]))
+                    print 'color: ',color
+
+                    w,h=imagen_fondo
+                    for x in range(w):
+                        for y in range(h):
+                            r, g, b, a = pixels[x, y]
+                            if (r, g, b) == verde:
+                                print'barra'
+                
+
+                       
+                       
+
     ventana.blit(imagen_fondo,(0,0))
     pygame.display.flip()
