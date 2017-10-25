@@ -23,8 +23,8 @@ def mensaje_pantalla(text):
     pygame.font.init()
     fuente = pygame.font.Font(None, 30)
     mensaje = fuente.render(text, 1,(255, 255, 255),(0,0,0))
-    ventana.blit(mensaje,(319,0))
-    #pygame.display.flip()
+    ventana.blit(mensaje,(319,3))
+    pygame.display.flip()
 
 def temp(color):
     temp=(color*0.034)+17.1
@@ -61,7 +61,7 @@ def Crea_Img(color):
     im = pygame.image.load('F6.png')
     w_h = pygame.Surface.get_size(im)
     destino = pygame.Surface(w_h)
-    im = pygame.transform.threshold(destino,im,color,(50,50,50),(0,0,0),2)
+    im = pygame.transform.threshold(destino,im,color,(20,20,20),(0,0,0),2)
     pygame.image.save(destino,'New.PNG')
     img = Image.open('New.PNG')
     imagen = img.convert('RGB')
@@ -83,7 +83,7 @@ imagen=Image.open('F6.PNG')
 img=img.convert('L')
 aColores=[]
 Colores_barra(img,aColores)
-
+pygame.display.flip()
 while True:
     for eventos in pygame.event.get():
         if eventos.type == QUIT:
@@ -95,7 +95,6 @@ while True:
                    if(pygame.mouse.get_pos()[1]>0 and pygame.mouse.get_pos()[1]<237):
                     pos=pygame.mouse.get_pos() 
                     colores_pix2barra(pos[0],pos[1])
-
 
         #Muestra Colores
         if(pygame.mouse.get_pressed()==(1,0,0)):
