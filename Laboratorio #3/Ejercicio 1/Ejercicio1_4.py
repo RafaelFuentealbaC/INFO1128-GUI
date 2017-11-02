@@ -7,6 +7,7 @@ destino = pygame.Surface(w_h)
 im = pygame.transform.threshold(destino,img,(255,0,0),(100,100,100),(0,0,0),2)
 pygame.image.save(destino,'F4_1.PNG')
 
+
 img = Image.open('F4_1.PNG')
 imagen = img.convert('RGB')
 pixels = imagen.load()
