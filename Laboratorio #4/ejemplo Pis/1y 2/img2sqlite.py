@@ -115,6 +115,8 @@ while 1:
 
     im = Image.open('fotos/img/a'+str(cont)+'.png')
     aImg = pinta_RGB(im)
+
+    aImg[0].show()
     aImg[0].save('fotos/rojo/a'+str(cont)+'.png')
     aImg[1].save('fotos/verde/a'+str(cont)+'.png')
     aImg[2].save('fotos/azul/a'+str(cont)+'.png')

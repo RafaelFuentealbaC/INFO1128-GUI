@@ -51,16 +51,22 @@ def Carga_Img(cont):
     win.mainloop()
     
 def Base_Datos():
-    Crear_Tabla()
     conexion = SQ.connect('db_img/img.db')
     consulta = conexion.cursor()
-    i = open('Imagenes'+'/'+rutas[cont],'rb')
-    imagen = i.read()
-    consulta.execute("INSERT INTO img(id,im) VALUES (?,?)",[cont,SQ.Binary(imagen)])
+    i = Image.open('Imagenes'+'/'+rutas[cont])
+    w,h=i.size
+    w2=int(w/4)
+    h2=int(h/4)
+    i.thumbnail((str(w2),str(h2)),'tmb'+rutas[cont]+".png")
+    i.save('tmb'+rutas[cont]+".png")    
+    imagen=open('tmb'+rutas[cont]+".png",'rb')
+    imagen = imagen.read()
+    consulta=consulta.execute("INSERT INTO img(id,im) VALUES (?,?)",[cont,SQ.Binary(imagen)])
     conexion.commit()
     print'imagen guardada en la Base de Datos'
     conexion.close()
-    
+
+Crear_Tabla()
 global img
 img = Image.open('Imagenes'+'/'+rutas[cont])
 img.thumbnail((500,500),Image.ANTIALIAS)
