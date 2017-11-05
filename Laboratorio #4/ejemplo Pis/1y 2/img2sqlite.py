@@ -123,6 +123,7 @@ while 1:
 
     i = open('fotos/img/a'+str(cont)+'.png','rb')
     cimagen = i.read()
+    cimagen.show()
     red = open('fotos/rojo/a'+str(cont)+'.png','rb')
     cred = red.read()
     green = open('fotos/verde/a'+str(cont)+'.png','rb')
