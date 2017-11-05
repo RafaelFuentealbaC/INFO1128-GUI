@@ -1,0 +1,11 @@
+create table Fotos(
+  id primary key not null, 
+  fecha date, 
+  hora time,
+  img blob, 
+  r blob, 
+  g blob, 
+  b blob,
+  gris blob
+);
+

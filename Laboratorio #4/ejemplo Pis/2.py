@@ -33,6 +33,7 @@ def nextt():
         a.append(StringIO(x))
         a.append(StringIO(y))
         a.append(StringIO(z))
+
         for i in range(5):
             a[i]=Image.open(a[i])
             a[i]=a[i].resize((100, 100))
@@ -111,6 +112,7 @@ a.append(StringIO(w))
 a.append(StringIO(x))
 a.append(StringIO(y))
 a.append(StringIO(z))
+
 img1=Image.open(a[0])
 img2=Image.open(a[1])
 img3=Image.open(a[2])
