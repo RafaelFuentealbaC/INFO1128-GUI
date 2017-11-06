@@ -44,7 +44,7 @@ def Avanzar():
     Carga_Img(cont)
     
 def Carga_Img(cont):
-    img=Image.open('Imagenes'+'/'+rutas[cont])
+    img=Image.open('IMAGENES'+'/'+rutas[cont])
     img.thumbnail((500,500),Image.ANTIALIAS)
     imgtk = ImageTk.PhotoImage(img)
     Tkinter.Label(win,image=imgtk,width=500,height=460).place(x=15,y=-50)
@@ -53,17 +53,17 @@ def Carga_Img(cont):
 def Base_Datos():
     conexion = SQ.connect('db_img/img.db')
     consulta = conexion.cursor()
-    i = Image.open('Imagenes'+'/'+rutas[cont])
+    i = Image.open('IMAGENES'+'/'+rutas[cont])
     w,h=i.size
-    w2=int(w/4)
-    h2=int(h/4)
-    i.thumbnail((str(w2),str(h2)),'tmb'+rutas[cont]+".png")
-    i.save('tmb'+rutas[cont]+".png")    
+    width=int(w/4)
+    height=int(h/4)
+    img = i.resize((width, height),Image.ANTIALIAS)
+    img.save('tmb'+rutas[cont]+".png")    
     imagen=open('tmb'+rutas[cont]+".png",'rb')
     imagen = imagen.read()
     consulta=consulta.execute("INSERT INTO img(id,im) VALUES (?,?)",[cont,SQ.Binary(imagen)])
     conexion.commit()
-    print'imagen guardada en la Base de Datos'
+    print 'Imagen guardada en la Base de Datos'
     conexion.close()
 
 Crear_Tabla()
