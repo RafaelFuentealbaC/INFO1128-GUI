@@ -31,9 +31,9 @@ def Gris():
     img=Image.open('Imagenes'+'/'+rutas[cont])
     img.thumbnail((500,500),Image.ANTIALIAS)
     img=img.convert('L')
-    img.save(rutas[cont]+'_gray'+".PNG")
-    img.save(rutas[cont]+'_gray'+".BMP")
-    print 'guardadas'
+    img.save('NuevasIMG/PNG/'+rutas[cont]+'_gray'+".PNG")
+    img.save('NuevasIMG/BMP/'+rutas[cont]+'_gray'+".BMP")
+    #print 'guardadas'
     imgtk = ImageTk.PhotoImage(img)
     Tkinter.Label(win,image=imgtk,width=500,height=460).place(x=15,y=-50)
     win.mainloop()
