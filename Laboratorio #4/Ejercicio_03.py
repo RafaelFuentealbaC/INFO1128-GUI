@@ -1,8 +1,4 @@
-import sqlite3 as SQ
-import binascii
-import serial
-import os
-import Tkinter
+import sqlite3 as SQ, binascii, serial, os, Tkinter, tkMessageBox
 from PIL import Image,ImageTk
 
 global cont
@@ -58,12 +54,12 @@ def Base_Datos():
     width=int(w/4)
     height=int(h/4)
     img = i.resize((width, height),Image.ANTIALIAS)
-    img.save('tmb'+rutas[cont]+".png")    
-    imagen=open('tmb'+rutas[cont]+".png",'rb')
+    img.save('IMG_DB/tmb'+rutas[cont]+".png")    
+    imagen=open('IMG_DB/tmb'+rutas[cont]+".png",'rb')
     imagen = imagen.read()
     consulta=consulta.execute("INSERT INTO img(im) VALUES (?)",[SQ.Binary(imagen)])
     conexion.commit()
-    print 'Imagen guardada en la Base de Datos'
+    tkMessageBox.showinfo('Mensajes','Imagen Guardada')
     conexion.close()
 
 Crear_Tabla()
@@ -75,7 +71,7 @@ win.title('Visualizador Imagenes')
 win.geometry('535x460')
 imgtk = ImageTk.PhotoImage(img) #Objeto PhotoImage de Tkinter
 cuadro = Tkinter.Label(win,image=imgtk,width=500,height=440).place(x=15,y=-50)
-btnRetroceder = Tkinter.Button(win,text='Retroceder',command=Retroceder,width=15,height=2,anchor='center').place(x=15,y=400) #crear funcion Retroceder
+btnRetroceder = Tkinter.Button(win,text='Retroceder',command=Retroceder,width=15,height=2,anchor='center').place(x=15,y=400)
 btnRetroceder = Tkinter.Button(win,text='Avanzar',command=Avanzar,width=15,height=2,anchor='center').place(x=145,y=400)
 btnRetroceder = Tkinter.Button(win,text='Insertar',command=Base_Datos,width=15,height=2,anchor='center').place(x=275,y=400)
 btnRetroceder = Tkinter.Button(win,text='Salir',command=win.destroy,width=15,height=2,anchor='center').place(x=405,y=400)
