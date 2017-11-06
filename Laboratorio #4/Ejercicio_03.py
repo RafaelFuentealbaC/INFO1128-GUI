@@ -32,14 +32,14 @@ def Crear_Tabla():
 def Retroceder():
     global cont
     cont-=1
-    if cont<=0:
-        cont=len(rutas)
+    if cont<1:
+        cont=len(rutas)-1
     Carga_Img(cont)
     
 def Avanzar():
     global cont
     cont+=1
-    if cont==len(rutas):
+    if cont>len(rutas)-1:
         cont=0
     Carga_Img(cont)
     
@@ -61,7 +61,7 @@ def Base_Datos():
     img.save('tmb'+rutas[cont]+".png")    
     imagen=open('tmb'+rutas[cont]+".png",'rb')
     imagen = imagen.read()
-    consulta=consulta.execute("INSERT INTO img(id,im) VALUES (?,?)",[cont,SQ.Binary(imagen)])
+    consulta=consulta.execute("INSERT INTO img(im) VALUES (?)",[SQ.Binary(imagen)])
     conexion.commit()
     print 'Imagen guardada en la Base de Datos'
     conexion.close()

@@ -5,17 +5,18 @@ import os
 global cont
 cont=0
 rutas=os.listdir('IMAGENES')
+print len(rutas)
 def Retroceder():
     global cont
     cont-=1
-    if cont<=0:
-        cont=len(rutas)
+    if cont<1:
+        cont=len(rutas)-1
     Carga_Img(cont)
     
 def Avanzar():
     global cont
     cont+=1
-    if cont==len(rutas):
+    if cont>len(rutas)-1:
         cont=0
     Carga_Img(cont)
     
