@@ -8,16 +8,18 @@ rutas=os.listdir('IMAGENES')
 
 def Retroceder():
     global cont
-    cont-=1
     if cont<1:
         cont=len(rutas)-1
+    else:
+        cont-=1
     Carga_Img(cont)
     
 def Avanzar():
     global cont
-    cont+=1
     if cont>len(rutas)-1:
         cont=0
+    else:
+        cont+=1
     Carga_Img(cont)
     
 
