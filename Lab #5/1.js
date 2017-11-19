@@ -1,11 +1,9 @@
 var http=require("http");
+	fs=require("fs");
 
-var manejador=function(solicitud,respuesta){
-	console.log("Recibido");
-	respuesta.end("Hola que tal");
+var html=fs.readFileSync("index.html")
 
-};
-
-var servidor=http.createServer(manejador);
-
-servidor.listen(8080);
+http.createServer(function(solicitud,respuesta){
+	respuesta.write(html);
+	respuesta.end();
+}).listen(8080);
